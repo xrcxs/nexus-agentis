@@ -8,14 +8,14 @@
 
 ```mermaid
 flowchart LR
-    START((START)) --> P[01 // Planner<br/>Validated 4-Section JSON]
-    P --> R[02 // Retriever<br/>Tavily + Dedupe + Credibility]
-    R --> S[03 // Synthesizer<br/>Strict &#91;S#&#93; Citations Only]
-    S --> V[04 // Verifier<br/>Claim Entailment Gate]
-    V -- "Weak Section & Loop < 3" --> R
-    V -- "Passed OR Max Loops (Low-Conf Flag)" --> H{05 // Human Gate<br/>SqliteSaver Interrupt}
+    START((START)) --> P["01 // Planner<br/>Validated 4-Section JSON"]
+    P --> R["02 // Retriever<br/>Tavily + Dedupe + Credibility"]
+    R --> S["03 // Synthesizer<br/>Strict citation tags only"]
+    S --> V["04 // Verifier<br/>Claim Entailment Gate"]
+    V -- "Weak section and loop under 3" --> R
+    V -- "Passed or max loops (low-confidence flag)" --> H{"05 // Human Gate<br/>SqliteSaver Interrupt"}
     H -- "Revise (with feedback)" --> R
-    H -- "Approve" --> F[06 // Finalizer<br/>Markdown Report + Ledger]
+    H -- "Approve" --> F["06 // Finalizer<br/>Markdown Report + Ledger"]
     H -- "Reject" --> REJ((REJECTED))
     F --> DONE((COMPLETED))
 ```
